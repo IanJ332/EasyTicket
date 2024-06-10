@@ -14,7 +14,7 @@ public class MainController {
 	/*
 	 * Shows the new project page in a new window.
 	 */
-	@FXML public void showNewProject() {
+	@FXML private void showNewProject() {
 		URL url = getClass().getClassLoader().getResource("view/NewProject.fxml");
 		
 		try {

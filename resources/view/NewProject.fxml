@@ -5,37 +5,49 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Project Name:" />
-            <TextField />
+            <TextField fx:id="projectNameTextField" />
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Date:" />
-            <DatePicker />
+            <DatePicker fx:id="projectDatePicker" />
          </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Description (Optional):" />
-            <TextField />
+            <TextArea fx:id="projectDescTextArea" prefHeight="200.0" prefWidth="200.0" />
          </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" text="Cancel" />
-            <Button mnemonicParsing="false" text="Confirm" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" text="Finish" />
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <padding>
+            <Insets right="20.0" />
+         </padding>
       </HBox>
    </children>
 </VBox>

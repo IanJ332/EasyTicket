@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
+<VBox fx:id="newProjectBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
@@ -31,7 +31,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Description (Optional):" />
-            <TextArea fx:id="projectDescTextArea" prefHeight="200.0" prefWidth="200.0" />
+            <TextArea fx:id="projectDescrTextArea" prefHeight="200.0" prefWidth="200.0" />
          </children>
          <padding>
             <Insets left="10.0" />

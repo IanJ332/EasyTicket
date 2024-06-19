@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="291.0" style="-fx-background-color: antiquewhite; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="content.controller.ProjectContentController">
+   <children>
+      <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="ProjectName">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="dateText" strokeType="OUTSIDE" strokeWidth="0.0" text="ProjectDate">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="descrText" strokeType="OUTSIDE" strokeWidth="0.0" text="ProjectDescr" />
+   </children>
+</VBox>

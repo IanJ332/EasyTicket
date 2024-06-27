@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="newProjectBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
+<VBox fx:id="newProjectBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Project Name:" />
             <TextField fx:id="projectNameTextField" />
+            <Text fx:id="errorText" fill="#fc1313" strokeType="OUTSIDE" strokeWidth="0.0" text="*Name is required" visible="false" />
          </children>
          <opaqueInsets>
             <Insets />

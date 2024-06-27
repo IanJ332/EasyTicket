@@ -3,22 +3,17 @@ package application.dao;
 import java.util.ArrayList;
 
 import content.bean.ProjectBean;
-import database.ProjectFileIO;
+import databaseAccessLayer.ProjectFileIO;
 
 public class ProjectDAO implements ProjectDAOInt{
 	
 	private ProjectFileIO database = new ProjectFileIO();
-	private ProjectBean bean;
-	private ArrayList<String> dataArray = new ArrayList<String>();
 	
 	public ProjectDAO() {};
-	
-	public ProjectDAO(ProjectBean bean) {
-		this.bean = bean;
-	}
 
 	@Override
-	public void storeProject() {
+	public void storeProject(ProjectBean bean) {
+		ArrayList<String> dataArray = new ArrayList<String>();
 		dataArray.add(bean.getName());
 		dataArray.add(bean.getStartDate());
 		dataArray.add(bean.getDescr());

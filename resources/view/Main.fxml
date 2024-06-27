@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -14,9 +15,9 @@
       </ToolBar>
    </top>
    <left>
-      <ScrollPane fx:id="projectScrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="projectScrollPane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="240.0" style="-fx-background-color: GREY;" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="projectVBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
+            <VBox fx:id="projectVBox" spacing="5.0" style="-fx-background-color: ALICEBLUE;" />
          </content>
       </ScrollPane>
    </left>

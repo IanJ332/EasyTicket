@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import application.CommonObjs;
 import application.dao.ProjectDAO;
 import content.bean.ProjectBean;
-import database.ProjectFileIO;
+import databaseAccessLayer.ProjectFileIO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -18,9 +18,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class NewProjectController {
-	
+
 	private CommonObjs commonObjs = CommonObjs.getInstance();
 
 	@FXML private VBox newProjectBox;
@@ -29,6 +30,8 @@ public class NewProjectController {
 	@FXML private TextField projectNameTextField;
 	@FXML private TextArea projectDescrTextArea;
 	@FXML private DatePicker projectDatePicker;
+	@FXML private Text errorText;
+	
 
 	/*
 	 * Perform all necessary post-processing.
@@ -55,33 +58,42 @@ public class NewProjectController {
 	 */
 	@FXML 
 	private void saveButtonAction() {
-		// Get the name from nameTextField
+		// Get the name from nameTextField and check it is not empty
 		String name = projectNameTextField.getText();
+		if (name.equals("")) {
+			throwNoProjectNameExeption();
+		} else {
+			// Get the date from datePicker
+			LocalDate localDate = projectDatePicker.getValue();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			String date = localDate.format(formatter);
 
-		// Get the date from datePicker
-		LocalDate localDate = projectDatePicker.getValue();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String date = localDate.format(formatter);
+			// Get the description from the textArea
+			String descr = projectDescrTextArea.getText();
 
-		// Get the description from the textArea
-		String descr = projectDescrTextArea.getText();
+			// Package data into a ProjectBean
+			ProjectBean projectBean = new ProjectBean(name, date, descr);
 
-		// Package data into a ProjectBean
-		ProjectBean projectBean = new ProjectBean(name, date, descr);
+			// Create a DAO
+			ProjectDAO dao = new ProjectDAO();
 
-		// Pass projectBean to DAO
-		ProjectDAO dao = new ProjectDAO(projectBean);
+			// Store the project to database through the DAO
+			dao.storeProject(projectBean);
 
-		// Store the project to database
-		dao.storeProject();
+			// Show the project
+			showProjectContent();
 
-		// Show the project
-		showProjectContent();
-
-		// Close this window
-		cancelButtonAction();
+			// Close this window
+			cancelButtonAction();
+		}
 	}
 
+	/**
+	 * Tell the user the project name field cannot be left empty
+	 */
+	private void throwNoProjectNameExeption() {
+		errorText.setVisible(true);
+	}
 
 	/**
 	 * Shows the new project content in the Main Menu

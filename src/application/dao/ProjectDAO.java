@@ -18,17 +18,17 @@ public class ProjectDAO implements ProjectDAOInt{
 		dataArray.add(bean.getStartDate());
 		dataArray.add(bean.getDescr());
 
-		database.storeProject(dataArray);
+		database.store(dataArray);
 	}
 
 	@Override
 	public ArrayList<String> readProjectEntry(int index) {
-		return database.readProject().get(index);
+		return database.read().get(index);
 	}
 
 	@Override
 	public int size() {
-		return database.getTableSize();
+		return database.size();
 	}
 	
 }

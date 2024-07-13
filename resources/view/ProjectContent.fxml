@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: antiquewhite; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="content.controller.ProjectContentController">
+<VBox fx:id="projectContentBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openNewTicketPage" style="-fx-background-color: antiquewhite; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="content.controller.ProjectContentController">
    <children>
       <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="ProjectName" underline="true">
          <font>

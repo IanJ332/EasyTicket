@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProjectFileIO {
+public class ProjectFileIO implements FileIO{
 	
 	private BufferedWriter writer;
 	private BufferedReader reader;
@@ -40,7 +40,8 @@ public class ProjectFileIO {
 	 * 
 	 * @param data	ArrayList of data to be stored, formatted: name, date, descr
 	 */
-	public void storeProject(ArrayList<String> data) {
+	@Override
+	public void store(ArrayList<String> data) {
 		// Build the string to write
 		String entry = "";
 		for (int i = 0; i < 2; i++) {
@@ -65,7 +66,8 @@ public class ProjectFileIO {
 	 * 
 	 * @return	An ArrayList of data arrays
 	 */
-	public ArrayList<ArrayList<String>> readProject() {
+	@Override
+	public ArrayList<ArrayList<String>> read() {
 		ArrayList<ArrayList<String>> container = new ArrayList<ArrayList<String>>();
 		String line;
 		try {
@@ -89,7 +91,13 @@ public class ProjectFileIO {
 		return container;
 	}
 	
-	public int getTableSize() {
+	@Override
+	public int size() {
 		return size;
+	}
+	
+	@Override
+	public void setSize(int size) {
+		ProjectFileIO.size = size;
 	}
 }

@@ -1,3 +1,2 @@
-new project|28/10/2023|desc
-123|28/10/2023|123
-123|28/10/2023|123
+2151097b-9585-49fe-8096-8e94ff9a64f4|CreatorHub|30/11/2023|An app for Creators.
+e217f0fe-724a-4cce-b8d3-ab389b249d1d|Dictionary|22/11/2023|A dictionary application.

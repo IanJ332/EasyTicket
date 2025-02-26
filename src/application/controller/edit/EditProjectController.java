@@ -1,18 +1,15 @@
-package application.controller;
+package application.controller.edit;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
-import application.CommonObjs;
 import application.controller.dictionary.ProjectDict;
 import application.controller.sort.ProjectListSorter;
-import application.dao.IDGenerator;
 import application.dao.ProjectDAO;
 import content.bean.ProjectBean;
 import content.controller.ProjectContentController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -21,11 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class NewProjectController {
-
-	private CommonObjs commonObjs = CommonObjs.getInstance();
-
-	@FXML private VBox newProjectBox;
+public class EditProjectController {
+	@FXML private VBox editProjectBox;
 	@FXML private Button cancelButton;
 	@FXML private Button saveButton;
 	@FXML private TextField projectNameTextField;
@@ -37,18 +31,17 @@ public class NewProjectController {
 	private String name;
 	private String date;
 	private String descr;
-
+	
 	/*
 	 * Perform all necessary post-processing.
 	 */
 	@FXML 
 	public void initialize() {
-		// Set the default time in the datePicker
-		projectDatePicker.setValue(LocalDate.now());
+
 	}
 
 	/*
-	 * Cancel new project and close the NewProject window.
+	 * Cancel edit project and close the EditProject window.
 	 */
 	@FXML 
 	private void cancelButtonAction() {
@@ -57,7 +50,7 @@ public class NewProjectController {
 		// Close it
 		stage.close();
 	}
-
+	
 	/*
 	 * Save the new project.
 	 */
@@ -76,20 +69,20 @@ public class NewProjectController {
 			// Get the description from the textArea
 			descr = projectDescrTextArea.getText();
 			
-			// Generate an ID for this project
-			id = IDGenerator.getIDGenerator().getRandomID();
-			
 			// Package data into a ProjectBean
 			ProjectBean projectBean = new ProjectBean(id, name, date, descr);
 
 			// Create a DAO
 			ProjectDAO dao = new ProjectDAO();
 
-			// Store the project to database through the DAO
-			dao.storeProject(projectBean);
-
-			// Show the project
-			showProjectContent(id, name, date, descr);
+			// Edit the project through the DAO
+			dao.editProject(id, projectBean);
+			
+			// Update the displayed Project content
+			updateProjectContent();
+			
+			// Sort the projects
+			ProjectListSorter.getProjectListSorter().sort();
 
 			// Close this window
 			cancelButtonAction();
@@ -104,25 +97,53 @@ public class NewProjectController {
 	}
 
 	/**
-	 * Shows the new project content in the Main Menu
+	 * Update the project content in the Main Menu
 	 */
-	public void showProjectContent(String id, String name, String date, String descr) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProjectContent.fxml"));
+	public void updateProjectContent() {
+		ProjectDict dict = ProjectDict.getProjectDict();
+		// Update the name, date, and descr of the displayed Project
+		ProjectContentController controller = dict.getProjectContentController(id);
+		controller.setName(name);
+		controller.setDate(date);
+		controller.setDescr(descr);
+	}
+	
+	public String getName() {
+		return name;
+	}
 
-			VBox contentVBox = (VBox) loader.load();
+	public void setName(String name) {
+		this.name = name;
+		// Set the default name to the old name
+		projectNameTextField.setText(name);
+	}
 
-			ProjectContentController controller = (ProjectContentController)loader.getController();
-			controller.setId(id);
-			controller.setName(name);
-			controller.setDate(date);
-			controller.setDescr(descr);
-			controller.initializeViewProjectPage();
-			ProjectDict.getProjectDict().addProject(id, controller);
-			commonObjs.getProjectVBox().getChildren().add(contentVBox);
-			ProjectListSorter.getProjectListSorter().sort();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+		LocalDate oldDate = LocalDate.parse(date, formatter);
+		projectDatePicker.setValue(oldDate);
+	}
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+		// Set the default descr to the old descr
+		projectDescrTextArea.setText(descr);
+	}
+
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 }

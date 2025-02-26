@@ -2,14 +2,16 @@ package content.bean;
 
 public class ProjectBean {
 	
-	public ProjectBean(String name, String startDate, String descr) {
+	public ProjectBean(String id, String name, String date, String descr) {
+		setId(id);
 		setName(name);
-		setStartDate(startDate);
+		setDate(date);
 		setDescr(descr);
 	}
 	
+	private String id;
 	private String name;
-	private String startDate;
+	private String date;
 	private String descr;
 	
 	public String getName() {
@@ -20,12 +22,12 @@ public class ProjectBean {
 		this.name = name;
 	}
 	
-	public String getStartDate() {
-		return startDate;
+	public String getDate() {
+		return date;
 	}
 	
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setDate(String startDate) {
+		this.date = startDate;
 	}
 	
 	public String getDescr() {
@@ -34,5 +36,18 @@ public class ProjectBean {
 	
 	public void setDescr(String descr) {
 		this.descr = descr;
+	}
+	
+	@Override
+	public String toString() {
+		return id + " " + name + " " + date + " " + descr;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

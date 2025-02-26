@@ -1,0 +1,6 @@
+231b796e-9e30-43b9-bee6-6b0915dec71f|c57ed7ed-4528-490b-8330-aca15733d558|2023.11.30.13.19.14|Display doesn't work.
+18ec9b0e-06b4-4c60-9bdd-c95c0ab6fe0f|c57ed7ed-4528-490b-8330-aca15733d558|2023.11.30.13.19.31|Color picker doesn't work properly.
+6b1c8a47-7eda-45b8-8d8f-6b68e6d32f7e|108651fe-6307-4bb7-abca-d3c5b37e70ca|2023.11.30.13.19.42|This bug is bad.
+1afb3703-266d-4bae-866a-76f0cf69b5cb|7d9dc4ff-85a9-4379-823b-3a7e649ac7e2|2023.11.30.13.19.58|Can't sort alphabetically.
+b24d1cd8-9eeb-4c18-9a62-56f8f7859d8e|7d9dc4ff-85a9-4379-823b-3a7e649ac7e2|2023.11.30.13.20.07|This bug requires a rework.
+33c26276-2a53-4046-9d02-59506ac7f388|108651fe-6307-4bb7-abca-d3c5b37e70ca|2023.12.01.13.05.07|Almost solved it. (edited comment)

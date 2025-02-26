@@ -16,14 +16,46 @@ public interface TicketDAOInt {
 	 * Returns an entry in the database.
 	 * 
 	 * @param index	Index of the entry to return
-	 * @return	An ArrayList that contains the ticket's details in the follow order: name, description
+	 * @return	A TicketBean that contains the ticket's details in the follow order: id, ProjectId, name, description
 	 */
-	public ArrayList<String> readTicketEntry(int index);
+	public TicketBean readTicketEntry(int index);
+	
+	/**
+	 * Returns an entry in the database.
+	 * 
+	 * @param id	Id of the ticket to return
+	 * @return		A TicketBean that contains the ticket's details in the follow order: id, ProjectId, name, description
+	 *
+	 */
+	public TicketBean readTicketEntry(String id);
+	
+	/**
+	 * Returns an ArrayList of all TicketBeans who belong to a specific Project
+	 * 
+	 * @param projectId	ID of Project to fetch all Tickets from
+	 * @return	An ArrayList of TicketBeans
+	 */
+	public ArrayList<TicketBean> getAllTicketsByProjectId(String projectId);
+	
+	/**
+	 * Delete a Ticket from the database
+	 * 
+	 * @param id	Id of ticket to delete
+	 */
+	public void deleteTicket(String id);
+	
+	/**
+	 * Edit a Ticket in the database
+	 * 
+	 * @param id	ID of Ticket to edit
+	 * @param bean	TicketBean containing new information to update with
+	 */
+	public void editTicket(String id, TicketBean bean);
 	
 	/**
 	 * Return the size of the database
 	 * 
 	 * @return	Number of entries in the database
 	 */
-	public int size();
+	public int size() ;
 }

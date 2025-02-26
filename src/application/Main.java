@@ -15,6 +15,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Bug Squasher 1.0");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

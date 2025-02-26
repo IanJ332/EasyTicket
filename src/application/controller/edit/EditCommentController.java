@@ -1,24 +1,18 @@
-package application.controller;
+package application.controller.edit;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import application.controller.dictionary.CommentDict;
-import application.controller.dictionary.TicketDict;
 import application.dao.CommentDAO;
-import application.dao.IDGenerator;
 import content.bean.CommentBean;
 import content.controller.CommentContentController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class NewCommentController {
-	@FXML private VBox newCommentBox;
+public class EditCommentController {
 	@FXML private Button cancelButton;
 	@FXML private Button saveButton;
 	@FXML private TextArea commentDescrTextArea;
@@ -35,6 +29,7 @@ public class NewCommentController {
 	 */
 	@FXML 
 	public void initialize() {
+		// Set new timestamp for edited comment
 		timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
 		timestampText.setText(timestamp);
 	}
@@ -61,20 +56,20 @@ public class NewCommentController {
 		if (descr.equals("")) {
 			throwMissingCommentDescrExeption();
 		} else {
-			// Generate an ID for this ticket
-			id = IDGenerator.getIDGenerator().getRandomID();
+			// Create a DAO
+			CommentDAO dao = new CommentDAO();
+			
+			// Get the id of the Ticket this Comment belongs to
+			ticketId = dao.readCommentEntry(id).getTicketId();
 			
 			// Package data into a CommentBean
 			CommentBean commentBean = new CommentBean(id, ticketId, timestamp, descr);
 
-			// Create a DAO
-			CommentDAO dao = new CommentDAO();
+			// Store the edited comment to database through the DAO
+			dao.editComment(id, commentBean);
 
-			// Store the comment to database through the DAO
-			dao.storeComment(commentBean);
-
-			// Show the comment
-			showCommentContent(id, ticketId, timestamp, descr);
+			// Show the edited comment
+			updateCommentContent(id,timestamp, descr);
 
 			// Close this window
 			cancelButtonAction();
@@ -93,22 +88,37 @@ public class NewCommentController {
 		this.ticketId = ticketId;
 	}
 
-	public void showCommentContent(String id, String ticketId, String timestamp, String descr) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/CommentContent.fxml"));
+	public String getId() {
+		return id;
+	}
 
-			VBox root = (VBox) loader.load();
+	public void setId(String id) {
+		this.id = id;
+	}
 
-			CommentContentController controller = (CommentContentController)loader.getController();
-			controller.setId(id);
-			controller.setTimestamp(timestamp);
-			controller.setDescr(descr);
-			CommentDict.getCommentDict().addComment(id, controller);
-			
-			VBox commentVBox = TicketDict.getTicketDict().getTicketContentController(ticketId).getViewTicketController().getCommentVBox();
-			commentVBox.getChildren().add(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+		timestampText.setText(timestamp);
+	}
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+		commentDescrTextArea.setText(descr);
+	}
+
+	public void updateCommentContent(String id, String timestamp, String descr) {
+		CommentDict dict = CommentDict.getCommentDict();
+		// Edit the Comment's information through its controller
+		CommentContentController controller = dict.getCommentContentController(id);
+		controller.setTimestamp(timestamp);
+		controller.setDescr(descr);
 	}
 }

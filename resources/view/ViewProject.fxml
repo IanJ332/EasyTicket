@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="375.0" style="-fx-background-color: ALICEBLUE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ViewProjectController">
+   <children>
+      <HBox>
+         <children>
+            <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" underline="true">
+               <font>
+                  <Font size="36.0" />
+               </font></Text>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Text fx:id="dateText" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Text fx:id="descrText" strokeType="OUTSIDE" strokeWidth="0.0" text="Descr" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" spacing="30.0">
+         <children>
+            <Button fx:id="newTicketButton" mnemonicParsing="false" onAction="#newTicketButtonAction" text="New Ticket" />
+         </children>
+         <padding>
+            <Insets right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" spacing="20.0">
+         <children>
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButtonAction" text="Edit" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
+            <Button fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonAction" text="Done" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" right="20.0" top="20.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

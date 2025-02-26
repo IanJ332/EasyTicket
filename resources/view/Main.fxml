@@ -10,7 +10,9 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <Button mnemonicParsing="false" onAction="#showNewProject" text="New Project" />
+            <Button mnemonicParsing="false" onAction="#showNewProjectPage" text="New Project" />
+            <TextField fx:id="projectSearchTextField" onAction="#searchProject" promptText="Project Search" />
+            <TextField fx:id="ticketSearchTextField" onAction="#searchTicket" promptText="Ticket Search" />
          </items>
       </ToolBar>
    </top>
@@ -22,6 +24,10 @@
       </ScrollPane>
    </left>
    <center>
-      <VBox fx:id="commentVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+      <ScrollPane fx:id="ticketScrollPane" style="-fx-background-color: GREY;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="ticketVBox" spacing="20.0" />
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

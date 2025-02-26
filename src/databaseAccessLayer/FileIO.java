@@ -14,12 +14,20 @@ public interface FileIO {
 	public ArrayList<ArrayList<String>> read();
 	
 	/*
+	 * Returns an ArrayList of the data on a line with matching ID
+	 * ID should be the first field in an entry
+	 */
+	public ArrayList<String> readID(String id);
+	
+	/*
+	 * Deletes an entry with the given id
+	 */
+	public void deleteEntry(String id);
+	
+	/*
 	 * Return the number of entries in the text file
 	 */
 	public int size();
 	
-	/*
-	 * Use to keep track of how many entries are in the file
-	 */
-	public void setSize(int size);
+	
 }

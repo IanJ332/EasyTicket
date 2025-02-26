@@ -9,7 +9,7 @@ public class CommonObjs {
 
 	private ScrollPane projectScrollPane;
 	private VBox projectVBox;
-	private VBox commentVBox;
+	private VBox ticketVBox;
 
 	public static CommonObjs getInstance() {
 		return commonObjs;
@@ -31,12 +31,12 @@ public class CommonObjs {
 		this.projectVBox = projectVBox;
 	}
 
-	public VBox getCommentVBox() {
-		return commentVBox;
+	public VBox getTicketVBox() {
+		return ticketVBox;
 	}
 	
-	public void setCommentVBox(VBox commentVBox) {
-		this.commentVBox = commentVBox;
+	public void setTicketVBox(VBox commentVBox) {
+		this.ticketVBox = commentVBox;
 	}
 
 }

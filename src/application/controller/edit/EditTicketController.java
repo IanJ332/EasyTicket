@@ -1,15 +1,10 @@
-package application.controller;
+package application.controller.edit;
 
-import java.io.IOException;
-
-import application.CommonObjs;
 import application.controller.dictionary.TicketDict;
-import application.dao.IDGenerator;
 import application.dao.TicketDAO;
 import content.bean.TicketBean;
 import content.controller.TicketContentController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -17,10 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class NewTicketController {
-
-	private CommonObjs commonObjs = CommonObjs.getInstance();
-
+public class EditTicketController {
 	@FXML private VBox newTicketBox;
 	@FXML private Button cancelButton;
 	@FXML private Button saveButton;
@@ -64,24 +56,23 @@ public class NewTicketController {
 		if (name.equals("")) {
 			throwNoTicketNameExeption();
 		} else {
+			// Create a DAO
+			TicketDAO dao = new TicketDAO();
 
+			// Get the id of the Project this Ticket belongs to
+			projectId = dao.readTicketEntry(id).getProjectId();
+			
 			// Get the description from the textArea
 			descr = ticketDescrTextArea.getText();
-
-			// Generate an ID for this ticket
-			id = IDGenerator.getIDGenerator().getRandomID();
 
 			// Package data into a TicketBean
 			TicketBean ticketBean = new TicketBean(id, projectId, name, descr);
 
-			// Create a DAO
-			TicketDAO dao = new TicketDAO();
+			// Edit the Ticket in the database through the DAO
+			dao.editTicket(id, ticketBean);
 
-			// Store the Ticket to database through the DAO
-			dao.storeTicket(ticketBean);
-
-			// Show the Ticket
-			showTicketContent(id, projectId, name, descr);
+			// Show the edited Ticket
+			updateTicketContent(id, name, descr);
 
 			// Close this window
 			cancelButtonAction();
@@ -93,29 +84,47 @@ public class NewTicketController {
 	}
 
 	/**
-	 * Shows the new Ticket content in the Main Menu
+	 * Update the new Ticket content in the Main Menu
 	 */
-	public void showTicketContent(String id, String projectId, String name, String descr) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/TicketContent.fxml"));
-			VBox contentVBox = (VBox) loader.load();
-			TicketContentController controller = (TicketContentController)loader.getController();
-			controller.setId(id);
-			controller.setName(name);
-			controller.setDescr(descr);
-			controller.initializeViewTicketPage();
-			TicketDict.getTicketDict().addTicket(id, controller);
+	public void updateTicketContent(String id, String name, String descr) {
+		TicketDict dict = TicketDict.getTicketDict();
+		TicketContentController controller = dict.getTicketContentController(id);
+		// Update the controller's content
+		controller.setName(name);
+		controller.setDescr(descr);
+	}
 
-			commonObjs.getTicketVBox().getChildren().add(contentVBox);		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+		ticketNameTextField.setText(name);
+	}
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+		ticketDescrTextArea.setText(descr);
+	}
+
+	public String getProjectId() {
+		return projectId;
 	}
 
 	public void setProjectId(String project) {
 		this.projectId = project;
 	}
-
-
 }
-
